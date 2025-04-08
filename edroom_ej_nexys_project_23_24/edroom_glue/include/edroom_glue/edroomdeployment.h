@@ -12,9 +12,9 @@
 //******************************************************************************
 // include deployment edroom components
  
+#include <public/ccsystemmng_iface_v1.h>
 #include <public/ccledmng_iface_v1.h>
 #include <public/ccdisplaysmng_iface_v1.h>
-#include <public/ccsystemmng_iface_v1.h>
 // ***********************************************************************
 // class CEDROOMSystemMemory
 // ***********************************************************************
@@ -24,8 +24,8 @@ class CEDROOMSystemMemory{
 	//!Messages Memory of component comp2
 	CEDROOMMessage	comp2Messages[10];
 	bool	comp2MessagesMarks[10];
-	CEDROOMQueue::CQueueNode	comp2QueueNodes[13];
-	bool	comp2QueueNodesMarks[13];
+	CEDROOMQueue::CQueueNode	comp2QueueNodes[11];
+	bool	comp2QueueNodesMarks[11];
  
 	//!Messages Memory of component comp3
 	CEDROOMMessage	comp3Messages[10];
@@ -36,14 +36,14 @@ class CEDROOMSystemMemory{
 	//!Messages Memory of component comp4
 	CEDROOMMessage	comp4Messages[10];
 	bool	comp4MessagesMarks[10];
-	CEDROOMQueue::CQueueNode	comp4QueueNodes[11];
-	bool	comp4QueueNodesMarks[11];
+	CEDROOMQueue::CQueueNode	comp4QueueNodes[13];
+	bool	comp4QueueNodesMarks[13];
  
 	public:
  
-	CCLEDMng::CEDROOMMemory comp2Memory;
-	CCDisplaysMng::CEDROOMMemory comp3Memory;
-	CCSystemMng::CEDROOMMemory comp4Memory;
+	CCSystemMng::CEDROOMMemory comp2Memory;
+	CCLEDMng::CEDROOMMemory comp3Memory;
+	CCDisplaysMng::CEDROOMMemory comp4Memory;
  
 //!Set Memory
 	void SetMemory();
@@ -61,27 +61,27 @@ class CEDROOMSystemCommSAP{
  
 	CEDROOMLocalConnection connections[2];
  
-	CCLEDMng   * mp_comp2;
-	CCDisplaysMng   * mp_comp3;
-	CCSystemMng   * mp_comp4;
+	CCSystemMng   * mp_comp2;
+	CCLEDMng   * mp_comp3;
+	CCDisplaysMng   * mp_comp4;
  
  
 //!Set Components
  
-	void SetComponents(CCLEDMng   *p_comp2,
-							CCDisplaysMng   *p_comp3,
-							CCSystemMng   *p_comp4);
+	void SetComponents(CCSystemMng   *p_comp2,
+							CCLEDMng   *p_comp3,
+							CCDisplaysMng   *p_comp4);
  
  
 //Signal Conversion
  
-	static TEDROOMSignal C4SystemMng_PDisplaysMngCtrl__C3DisplaysMng_PDisplaysMngCtrl(TEDROOMSignal signal);
-	static TEDROOMSignal C3DisplaysMng_PDisplaysMngCtrl__C4SystemMng_PDisplaysMngCtrl(TEDROOMSignal signal);
+	static TEDROOMSignal C2SystemMng_PDisplaysMngCtrl__C4DisplaysMng_PDisplaysMngCtrl(TEDROOMSignal signal);
+	static TEDROOMSignal C4DisplaysMng_PDisplaysMngCtrl__C2SystemMng_PDisplaysMngCtrl(TEDROOMSignal signal);
  
 //Signal Conversion
  
-	static TEDROOMSignal C4SystemMng_PLEDMngCtrl__C2LEDMng_PLEDMngCtrl(TEDROOMSignal signal);
-	static TEDROOMSignal C2LEDMng_PLEDMngCtrl__C4SystemMng_PLEDMngCtrl(TEDROOMSignal signal);
+	static TEDROOMSignal C2SystemMng_PLEDMngCtrl__C3LEDMng_PLEDMngCtrl(TEDROOMSignal signal);
+	static TEDROOMSignal C3LEDMng_PLEDMngCtrl__C2SystemMng_PLEDMngCtrl(TEDROOMSignal signal);
  
  
 //!Register Interfaces
@@ -112,18 +112,18 @@ static Pr_TaskRV_t main_task(Pr_TaskP_t);
 	CEDROOMSystemMemory   systemMemory;
 	CEDROOMSystemCommSAP  systemCommSAP;
  
-	CCLEDMng   * mp_comp2;
-	CCDisplaysMng   * mp_comp3;
-	CCSystemMng   * mp_comp4;
+	CCSystemMng   * mp_comp2;
+	CCLEDMng   * mp_comp3;
+	CCDisplaysMng   * mp_comp4;
  
 	public:
  
 	CEDROOMSystemDeployment();
  
 //!Deployment Configuration
-	void Config(CCLEDMng   *p_comp2,
-					CCDisplaysMng   *p_comp3,
-					CCSystemMng   *p_comp4);
+	void Config(CCSystemMng   *p_comp2,
+					CCLEDMng   *p_comp3,
+					CCDisplaysMng   *p_comp4);
  
 //!Deployment Start
 	void Start();
@@ -132,9 +132,9 @@ static Pr_TaskRV_t main_task(Pr_TaskP_t);
 	void StartComponents();
 //!Config Components
  
-	CCLEDMng::CEDROOMMemory 		* GetComp2Memory(){return &systemMemory.comp2Memory;}
-	CCDisplaysMng::CEDROOMMemory 		* GetComp3Memory(){return &systemMemory.comp3Memory;}
-	CCSystemMng::CEDROOMMemory 		* GetComp4Memory(){return &systemMemory.comp4Memory;}
+	CCSystemMng::CEDROOMMemory 		* GetComp2Memory(){return &systemMemory.comp2Memory;}
+	CCLEDMng::CEDROOMMemory 		* GetComp3Memory(){return &systemMemory.comp3Memory;}
+	CCDisplaysMng::CEDROOMMemory 		* GetComp4Memory(){return &systemMemory.comp4Memory;}
  
 };
 #endif
