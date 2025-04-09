@@ -13,7 +13,6 @@ RM := rm -rf
 -include service_libraries/pus_services/pus_tm_handler/scr/subdir.mk
 -include service_libraries/pus_services/pus_tc_handler/src/subdir.mk
 -include service_libraries/pus_services/pus_sys_data_pool/src/subdir.mk
--include service_libraries/pus_services/pus_service20/src/subdir.mk
 -include service_libraries/pus_services/pus_service17/src/subdir.mk
 -include service_libraries/pus_services/pus_service03/src/subdir.mk
 -include service_libraries/pus_services/pus_service01/src/subdir.mk
@@ -41,8 +40,6 @@ RM := rm -rf
 -include asw/components/uah_asw/src/subdir.mk
 -include asw/components/cctcmanager/src/subdir.mk
 -include asw/components/cchk_fdirmng/src/subdir.mk
--include asw/components/ccbkgtcexec/src/subdir.mk
--include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -74,7 +71,7 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := asw_pus_rtems_leon3_st20_resuelto
+BUILD_ARTIFACT_NAME := asw_pus_rtems_leon3_st20
 BUILD_ARTIFACT_EXTENSION :=
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
@@ -85,19 +82,19 @@ BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ART
 all: main-build
 
 # Main-build Target
-main-build: asw_pus_rtems_leon3_st20_resuelto
+main-build: asw_pus_rtems_leon3_st20
 
 # Tool invocations
-asw_pus_rtems_leon3_st20_resuelto: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
+asw_pus_rtems_leon3_st20: $(OBJS) $(USER_OBJS) makefile objects.mk $(OPTIONAL_TOOL_DEPS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cross G++ Linker'
-	sparc-rtems-g++ -msoft-float -o "asw_pus_rtems_leon3_st20_resuelto" $(OBJS) $(USER_OBJS) $(LIBS)
+	sparc-rtems-g++ -msoft-float -o "asw_pus_rtems_leon3_st20" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) asw_pus_rtems_leon3_st20_resuelto
+	-$(RM) asw_pus_rtems_leon3_st20
 	-@echo ' '
 
 .PHONY: all clean dependents main-build
