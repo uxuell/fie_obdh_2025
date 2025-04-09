@@ -51,6 +51,7 @@ service_libraries/emu_tc_programming/src \
 service_libraries/pus_services/pus_service01/src \
 service_libraries/pus_services/pus_service03/src \
 service_libraries/pus_services/pus_service17/src \
+service_libraries/pus_services/pus_service20/src \
 service_libraries/pus_services/pus_sys_data_pool/src \
 service_libraries/pus_services/pus_tc_handler/src \
 service_libraries/pus_services/pus_tm_handler/scr \
