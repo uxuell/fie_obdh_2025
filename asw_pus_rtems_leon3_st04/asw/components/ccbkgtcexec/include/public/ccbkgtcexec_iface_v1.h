@@ -70,8 +70,8 @@ public:
 	//******************  Component Communication Ports *******************
 	// ********************************************************************
 
-	//! BKGTCExeCtrl Component Port
-	CEDROOMInterface	BKGTCExeCtrl;
+	//! BKGExecCtrl Component Port
+	CEDROOMInterface	BKGExecCtrl;
 
 
 
@@ -155,7 +155,7 @@ public:
 		CEDROOMMessage * &MsgBack;
 
 		//!Component ports
-		CEDROOMInterface & BKGTCExeCtrl;
+		CEDROOMInterface & BKGExecCtrl;
 
 
 		//! State Identifiers

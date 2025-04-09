@@ -15,7 +15,7 @@ CCBKGTCExec::EDROOM_CTX_Top_0::EDROOM_CTX_Top_0(CCBKGTCExec &act ):
 	EDROOMcomponent(act),
 	Msg(EDROOMcomponent.Msg),
 	MsgBack(EDROOMcomponent.MsgBack),
-	BKGTCExeCtrl(EDROOMcomponent.BKGTCExeCtrl)
+	BKGExecCtrl(EDROOMcomponent.BKGExecCtrl)
 {
 }
 
@@ -24,7 +24,7 @@ CCBKGTCExec::EDROOM_CTX_Top_0::EDROOM_CTX_Top_0(EDROOM_CTX_Top_0 &context):
 	EDROOMcomponent(context.EDROOMcomponent),
 	Msg(context.Msg),
 	MsgBack(context.MsgBack),
-	BKGTCExeCtrl(context.BKGTCExeCtrl)
+	BKGExecCtrl(context.BKGExecCtrl)
 {
 
 }
@@ -63,7 +63,12 @@ void	CCBKGTCExec::EDROOM_CTX_Top_0::FExecBKGTC()
 	
 		// Data access
 	
-	varSBKGTC.ExecTC();
+	// ... =varSBKGTC;
+	
+		
+	
+ 
+varSBKGTC.ExecTC();
 
 }
 
@@ -206,7 +211,7 @@ TEDROOMTransId CCBKGTCExec::EDROOM_SUB_Top_0::EDROOMReadyArrival()
 
 			case (SBKGTC): 
 
-				 if (*Msg->GetPInterface() == BKGTCExeCtrl)
+				 if (*Msg->GetPInterface() == BKGExecCtrl)
 				{
 
 					//Next transition is  ExecTC
