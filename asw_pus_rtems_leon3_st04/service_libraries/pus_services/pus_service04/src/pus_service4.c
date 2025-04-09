@@ -71,10 +71,19 @@ void pus_service4_exec_tc(tc_handler_t *ptc_handler) {
 
 
 	switch (ptc_handler->tc_df_header.subtype) {
-	//TODO 06 define ST[04] telecommand execution logic
+	//done 06 define ST[04] telecommand execution logic
 
-
-
+		case (1):
+			pus_service3_exec_TC_4_1(ptc_handler);
+			break;
+		case (6):
+			pus_service3_exec_TC_4_6(ptc_handler);
+			break;
+		case (7):
+			pus_service3_exec_TC_4_7(ptc_handler);
+			break;
+		default:
+			break;
 
 
 

@@ -91,8 +91,18 @@ tc_accept_report_t pus_service1_tc_acceptation(tc_handler_t *ptc_handler) {
 
 				}
 				break;
-			//TODO 03 Accept TC[04,1], TC[04,6] && TC[04,7]
+			//done 03 Accept TC[04,1], TC[04,6] && TC[04,7]
+				case (4):
+								switch (ptc_handler->tc_df_header.subtype) {
+								case (1):
+								case (6):
+								case (7):
+									break;
+								default:
+									accept_report.accept_status = TCAcceptationSubTypeError;
 
+								}
+								break;
 			case (20):
 					switch (ptc_handler->tc_df_header.subtype) {
 					case (1):
