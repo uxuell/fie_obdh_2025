@@ -1,7 +1,5 @@
 /*
- * emu_tc_programming.cpp
- *
- *  Created on: Jan 13, 2017
+ * pus_service20.c
  *
  *  Created on: Oct 26, 2024
  *      Author: Oscar Rodriguez Polo
@@ -26,37 +24,42 @@
  *
  ****************************************************************************/
 
-#include <public/emu_hw_timecode_drv_v1.h>
-#include <public/emu_sc_channel_drv_v1.h>
-#include <public/emu_gss_v1.h>
+#include <public/pus_service20.h>
+#include <public/pus_sys_data_pool.h>
+#include "public/adc_drv.h"
 
-#define FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
-
-#define FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
-
-#ifdef FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
-
-//DONE 07 Use EmuGSS_TCProgram20_3_uint8 to Set PID 20 value to 99 (0x63) and after that
-//use EmuGSS_TCProgram20_1 to read PID 20
-
-
-#endif
-
-#ifdef FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
-
-
-//TODO 08 Use EmuGSS_TCProgram20_3_uint32 to write PID 10 to 55 (0x37)
-	//Use EmuGSS_TCProgram20_1 to read PID 10
-	//Use EmuGSS_TCProgram20_3_uint32 to write the value 33 to a read only PID 3
-		//Check TM[1.4] is received
-
-
-
-
-#endif
+#include "public/ccsds_pus.h"
+#include "public/crc.h"
+#include "public/pus_tm_handler.h"
+#include "public/pus_service1.h"
+#include "public/pus_service3.h"
+#include "pus_service20/aux_pus_service20_tx_tm.h"
+#include "pus_service20/aux_pus_service20_exec_tc.h"
 
 
 
 
 
+void pus_service20_exec_tc(tc_handler_t *ptc_handler){
+
+	switch (ptc_handler->tc_df_header.subtype) {
+
+	//DONE 05 exec TC[20,X] using the corresponding pus_service3_exec_TC_20_X
+	pus_service3_exec_TC_20_X(ptc_handler);
+	break;
+	case (1):
+		pus_service3_exec_TC_20_1(ptc_handler);
+			break;
+	case (3):
+			pus_service3_exec_TC_20_3(ptc_handler);
+				break;
+
+
+	default:
+		break;
+	}
+
+
+
+}
 

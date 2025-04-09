@@ -1,7 +1,5 @@
 /*
- * emu_tc_programming.cpp
- *
- *  Created on: Jan 13, 2017
+ * aux_pus_service20_tx_tm.c
  *
  *  Created on: Oct 26, 2024
  *      Author: Oscar Rodriguez Polo
@@ -26,36 +24,48 @@
  *
  ****************************************************************************/
 
-#include <public/emu_hw_timecode_drv_v1.h>
-#include <public/emu_sc_channel_drv_v1.h>
-#include <public/emu_gss_v1.h>
+#include "public/config.h"
+#include "public/pus_tm_handler.h"
+#include "public/pus_service1.h"
 
-#define FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
+#include "pus_services/aux_pus_services_utils.h"
 
-#define FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
+/**
+ * \brief transmit the TM[20,2] telemetry
+ * \param validPID a valid PID identifier
+ */
+error_code_t pus_service20_tx_TM_20_2(uint16_t validPID){
 
-#ifdef FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
+	error_code_t error = 0;
 
-//DONE 07 Use EmuGSS_TCProgram20_3_uint8 to Set PID 20 value to 99 (0x63) and after that
-//use EmuGSS_TCProgram20_1 to read PID 20
+	tm_handler_t tm_handler;
 
+	//Alloc memory
+	error = tm_handler_mem_alloc_and_startup(&tm_handler);
 
-#endif
+	if (0 == error) {
 
-#ifdef FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
+		//N=1 -> TM
+		error =tm_handler_append_uint8_appdata_field(&tm_handler,1);
 
+		//PID-> TM
+		error += tm_handler_append_uint16_appdata_field(&tm_handler, validPID);
 
-//TODO 08 Use EmuGSS_TCProgram20_3_uint32 to write PID 10 to 55 (0x37)
-	//Use EmuGSS_TCProgram20_1 to read PID 10
-	//Use EmuGSS_TCProgram20_3_uint32 to write the value 33 to a read only PID 3
-		//Check TM[1.4] is received
+		//PIDValue -> TM
+		error += pus_services_TM_X_Y_write_PIDValue(&tm_handler, validPID);
 
+		//close and Tx only in no error
+		if (0 == error) {
 
+			error = tm_handler_close_and_tx(&tm_handler, 20, 2);
+		}
+		//free memory
+		tm_handler_free_mem(&tm_handler);
+	}
 
+	return error;
 
-#endif
-
-
+}
 
 
 

@@ -1,7 +1,5 @@
 /*
- * emu_tc_programming.cpp
- *
- *  Created on: Jan 13, 2017
+ * aux_pus_service20_exec_tc.h
  *
  *  Created on: Oct 26, 2024
  *      Author: Oscar Rodriguez Polo
@@ -26,37 +24,31 @@
  *
  ****************************************************************************/
 
-#include <public/emu_hw_timecode_drv_v1.h>
-#include <public/emu_sc_channel_drv_v1.h>
-#include <public/emu_gss_v1.h>
+#ifndef SERVICE_LIBRARIES_PUS_SERVICES_PUS_SERVICE20_INCLUDE_PUBLIC_AUX_PUS_SERVICE20_EXEC_TC_H_
+#define SERVICE_LIBRARIES_PUS_SERVICES_PUS_SERVICE20_INCLUDE_PUBLIC_AUX_PUS_SERVICE20_EXEC_TC_H_
 
-#define FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
+#include "public/config.h"
+#include <public/pus_tc_handler.h>
 
-#define FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
+/**
+ * \brief executes a TC[20,1] telecommand
+ * \param ptc_handler pointer to the tc handler
+ */
+void pus_service20_exec_TC_20_1(tc_handler_t *ptc_handler);
 
-#ifdef FT_UAH_ASW_ICU_SERV_20_PARAM_10_ACCESS_0070
+/**
+ * \brief executes a TC[20,3] telecommand
+ * \param ptc_handler pointer to the tc handler
+ */
+void pus_service20_exec_TC_20_3(tc_handler_t *ptc_handler);
 
-//DONE 07 Use EmuGSS_TCProgram20_3_uint8 to Set PID 20 value to 99 (0x63) and after that
-//use EmuGSS_TCProgram20_1 to read PID 20
-
-
-#endif
-
-#ifdef FT_UAH_ASW_ICU_SERV_20_ERROR_WRITE_PID_0080
-
-
-//TODO 08 Use EmuGSS_TCProgram20_3_uint32 to write PID 10 to 55 (0x37)
-	//Use EmuGSS_TCProgram20_1 to read PID 10
-	//Use EmuGSS_TCProgram20_3_uint32 to write the value 33 to a read only PID 3
-		//Check TM[1.4] is received
-
-
-
-
-#endif
+/**
+ * \brief executes a TC[20,3] telecommand
+ * \param ptc_handler pointer to the tc handler
+ */
+void pus_service20_TC_20_3_set_param(tc_handler_t *ptc_handler);
 
 
 
 
-
-
+#endif /* SERVICE_LIBRARIES_PUS_SERVICES_PUS_SERVICE20_INCLUDE_PUBLIC_AUX_PUS_SERVICE20_EXEC_TC_H_ */

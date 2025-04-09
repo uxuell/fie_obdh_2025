@@ -40,6 +40,8 @@ RM := rm -rf
 -include asw/components/uah_asw/src/subdir.mk
 -include asw/components/cctcmanager/src/subdir.mk
 -include asw/components/cchk_fdirmng/src/subdir.mk
+-include asw/components/ccbkgtcexec/src/subdir.mk
+-include subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
